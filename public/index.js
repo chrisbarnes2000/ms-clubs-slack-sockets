@@ -7,6 +7,7 @@ $(document).ready(() => {
   // Get the online users from the server
   socket.emit("get online users");
   //Each user should be in the general channel by default.
+  socket.emit("get channels");
   socket.emit("user changed channel", "General");
 
   //Users can change the channel by clicking on its name.
@@ -62,6 +63,14 @@ $(document).ready(() => {
   socket.on("new user", (username) => {
     console.log(`${username} has joined the chat`);
     $(".users-online").append(`<div class="user-online">${username}</div>`);
+  });
+
+  socket.on("get channels", (channels) => {
+    //You may have not have seen this for loop before. It's syntax is for(key in obj)
+    //Our usernames are keys in the object of channels.
+    for (channel in channels) {
+      $(".channels").append(`<div class="channel">${channel}</div>`);
+    }
   });
 
   //Output the new message
