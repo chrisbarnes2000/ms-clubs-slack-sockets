@@ -1,0 +1,25 @@
+{
+  "name": "ms-clubs-slack-sockets",
+  "version": "0.0.1",
+  "description": "In this tutorial we're going to be building our very own live messaging application.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisbarnes2000/ms-clubs-slack-sockets.git"
+  },
+  "author": "Chris Barnes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chrisbarnes2000/ms-clubs-slack-sockets/issues"
+  },
+  "homepage": "https://github.com/chrisbarnes2000/ms-clubs-slack-sockets#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.0",
+    "mongoose": "^5.12.5",
+    "socket.io": "^4.0.1"
+  }
+}
