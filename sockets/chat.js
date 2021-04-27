@@ -9,6 +9,12 @@ module.exports = (io, socket, onlineUsers) => {
     io.emit("new user", username);
   });
 
+  socket.on("delete user", (username) => {
+    console.log(`✋ ${username} has left the chat! ✋`);
+    delete onlineUsers[socket.username];
+    io.emit("user has left", onlineUsers);
+  });
+
   //Listen for new messages
   socket.on("new message", (data) => {
     // Send that data back to ALL clients
@@ -27,5 +33,6 @@ module.exports = (io, socket, onlineUsers) => {
     //This deletes the user by using the username we saved to the socket
     delete onlineUsers[socket.username];
     io.emit("user has left", onlineUsers);
+    socket.disconnect(); // DISCONNECT SOCKET
   });
 };

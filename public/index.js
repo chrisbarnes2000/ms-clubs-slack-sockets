@@ -13,9 +13,15 @@ $(document).ready(() => {
       socket.emit("new user", $("#username-input").val());
       // Save the current user when created
       currentUser = $("#username-input").val();
-      $(".username-form").remove();
+      $(".username-form").css("display", "none");
       $(".main-container").css("display", "flex");
     }
+  });
+
+  $("#delete-user-btn").click((e) => {
+    socket.emit("delete user", currentUser);
+    $(".username-form").css("display", "flex");
+    $(".main-container").css("display", "none");
   });
 
   $("#send-chat-btn").click((e) => {
