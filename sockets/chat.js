@@ -29,6 +29,20 @@ module.exports = (io, socket, onlineUsers, channels) => {
     });
   });
 
+  socket.on("new private message", (newPrivateMessage) => {
+    //Save the new channel to our channels object. The array will hold the messages.
+    newPrivateMessages[newPrivateMessage] = [];
+    //Have the socket join the new channel room.
+    socket.join(newPrivateMessage);
+    //Inform all clients of the new channel.
+    io.emit("new channel", newPrivateMessage);
+    //Emit to the client that made the new channel, to change their channel to the one they made.
+    socket.emit("user changed channel", {
+      channel: newPrivateMessage,
+      messages: privateMessages[newPrivateMessage],
+    });
+  });
+
   //Have the socket join the room of the channel
   socket.on("user changed channel", (newChannel) => {
     socket.join(newChannel);

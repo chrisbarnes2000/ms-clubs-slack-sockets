@@ -16,6 +16,12 @@ $(document).ready(() => {
     socket.emit("user changed channel", newChannel);
   });
 
+  $(document).on("click", ".users-online", (e) => {
+    let newPrivateMessage = e.target.textContent;
+    socket.emit("new channel", newPrivateMessage);
+    socket.emit("user changed channel", newPrivateMessage);
+  });
+
   $("#create-user-btn").click((e) => {
     e.preventDefault();
     if ($("#username-input").val().length > 0) {
@@ -125,4 +131,20 @@ $(document).ready(() => {
     `);
     });
   });
+
+  //   socket.on("user changed private message", (data) => {
+  //     $(".channel-current").addClass("channel");
+  //     $(".channel-current").removeClass("channel-current");
+  //     $(`.channel:contains('${data.channel}')`).addClass("channel-current");
+  //     $(".channel-current").removeClass("channel");
+  //     $(".message").remove();
+  //     data.messages.forEach((message) => {
+  //       $(".message-container").append(`
+  //       <div class="message">
+  //         <p class="message-user">${message.sender}: </p>
+  //         <p class="message-text">${message.message}</p>
+  //       </div>
+  //     `);
+  //     });
+  //   });
 });
