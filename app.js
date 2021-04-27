@@ -5,21 +5,28 @@ const app = express();
 const server = require("http").Server(app);
 
 //Socket.io
-const io = require('socket.io')(server);
+const io = require("socket.io")(server);
 io.on("connection", (socket) => {
-  console.log("🔌 New user connected! 🔌");
-})
+  // This file will be read on new socket connections
+  require("./sockets/chat.js")(io, socket);
+});
 
-//Express View Engine for Handlebars
 const exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
-//Establish your public folder
-app.use('/public', express.static('public'))
 
+// //Loads the handlebars module
+// const handlebars = require("express-handlebars");
+// //Sets our app to use the handlebars engine
+// app.set("view engine", "hbs");
+// //Sets handlebars configurations (we will go through them later on)
+// app.engine("hbs", handlebars());
+
+//Establish your public folder
+app.use("/public", express.static("public"));
 
 app.get("/", (req, res) => {
-  res.render("index.handlebars");
+  res.render("layouts/main.handlebars");
 });
 
 server.listen("3000", () => {
