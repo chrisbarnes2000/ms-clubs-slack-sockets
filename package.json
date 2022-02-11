@@ -18,7 +18,7 @@
   "homepage": "https://github.com/chrisbarnes2000/ms-clubs-slack-sockets#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "express-handlebars": "^5.3.0",
+    "express-handlebars": "^5.3.1",
     "mongoose": "^5.12.5",
     "socket.io": "^4.0.1"
   }
